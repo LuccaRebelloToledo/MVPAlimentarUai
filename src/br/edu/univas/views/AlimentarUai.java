@@ -5,11 +5,14 @@ import java.util.Scanner;
 public class AlimentarUai {
 	
 	public static void main(String[] args) {
+		
 		Scanner scanner = new Scanner(System.in);
 		iniciarAplicacao(scanner);
+		
 	}
 	
 	public static void iniciarAplicacao(Scanner scanner) {
+		
 		boolean continua = true;
 		String escolha = "";
 		do {
@@ -37,4 +40,5 @@ public class AlimentarUai {
 			}
 		} while (continua);
 	}
+	
 }

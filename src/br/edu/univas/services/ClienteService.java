@@ -1,5 +1,5 @@
 package br.edu.univas.services;
 
-public class Cliente {
+public class ClienteService {
 
 }
