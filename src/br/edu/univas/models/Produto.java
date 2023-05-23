@@ -2,11 +2,11 @@ package br.edu.univas.models;
 
 public class Produto {
 	
-	private int codProd;
-	private String nomeProd;
-	private String marcaProd;
-	private int qtdeEstoqueProd;
-	private double precoVendaProd;
+	protected int codProd;
+	protected String nomeProd;
+	protected String marcaProd;
+	protected int qtdeEstoqueProd;
+	protected double precoVendaProd;
 	private static int contadorCodProd = 0;
 	
 	public Produto(String nomeProd, String marcaProd, int qtdeEstoqueProd, double precoVendaProd) {
@@ -72,5 +72,14 @@ public class Produto {
 		Produto aux = (Produto)obj;
 		return this.codProd == aux.getCodProd();
 	}
-
+	
+	public String toString() {
+		return 
+				"Produto \n" +
+				"Código: " + this.getCodProd() + "\n" +
+				"Nome: " + this.getNomeProd() + "\n" +
+				"Marca: " + this.getMarcaProd() + "\n" +
+				"Qtde Estoque: " + this.getQtdeEstoqueProd() + "\n" +
+				"Preço de Venda: " + this.getPrecoVendaProd();
+	}
 }

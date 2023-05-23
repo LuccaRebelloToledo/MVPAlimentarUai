@@ -1,27 +1,21 @@
 package br.edu.univas.models;
 
-public class Extrato {
+public class Extrato extends Produto {
 	
 	private String clienteCPF;
 	private double valorTotal;
-	private Produto produto;
-	
-	public Extrato(String clienteCPF, Produto produto, double valorTotal) {
+
+	public Extrato(String clienteCPF, double valorTotal, String nomeProd, String marcaProd, int qtdeEstoqueProd, double precoVendaProd) {
+		super(nomeProd, marcaProd, qtdeEstoqueProd, precoVendaProd);
 		this.clienteCPF = clienteCPF;
-		this.produto = produto;
 		this.valorTotal = valorTotal;
 	}
-
-	public Produto getProduto() {
-		return produto;
-	}
-
-	public double getValorTotal() {
-		return valorTotal;
-	}
-
-	public String getClienteCPF() {
-		return clienteCPF;
-	}
 	
+	public String getClienteCPF() {
+		return this.clienteCPF;
+	}
+	public double getValorTotal() {
+		return this.valorTotal;
+	}
+
 }
