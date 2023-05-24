@@ -1,14 +1,19 @@
 package br.edu.univas.models;
 
-public class Extrato extends Produto {
+public class Extrato {
 	
 	private String clienteCPF;
 	private double valorTotal;
+	private String nomeProd;
+	private int qtdeCompradaProd;
+	private double precoVendaProd;
 
-	public Extrato(String clienteCPF, double valorTotal, String nomeProd, String marcaProd, int qtdeEstoqueProd, double precoVendaProd) {
-		super(nomeProd, marcaProd, qtdeEstoqueProd, precoVendaProd);
-		this.clienteCPF = clienteCPF;
-		this.valorTotal = valorTotal;
+	public Extrato(String clienteCPF, String nomeProd, int qtdeCompradaProd, double precoVendaProd) {
+			this.clienteCPF = clienteCPF;
+			this.nomeProd = nomeProd;
+			this.qtdeCompradaProd = qtdeCompradaProd;
+			this.precoVendaProd = precoVendaProd;
+			this.valorTotal = qtdeCompradaProd * precoVendaProd;
 	}
 	
 	public String getClienteCPF() {
@@ -16,6 +21,18 @@ public class Extrato extends Produto {
 	}
 	public double getValorTotal() {
 		return this.valorTotal;
+	}
+
+	public String getNomeProd() {
+		return this.nomeProd;
+	}
+
+	public int getQtdeCompradaProd() {
+		return this.qtdeCompradaProd;
+	}
+
+	public double getPrecoVendaProd() {
+		return this.precoVendaProd;
 	}
 
 }
