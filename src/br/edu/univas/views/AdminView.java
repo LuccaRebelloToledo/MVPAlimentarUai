@@ -12,6 +12,14 @@ public class AdminView {
 		
 	}
 	
+	private void menuPrincipal() {
+		System.out.println("1- Cadastrar Produto");
+		System.out.println("2- Editar Produto");
+		System.out.println("3- Excluir Produto");
+		System.out.println("4- Consultar Produto(s) \n");
+		System.out.println("0- Início");
+	}
+	
 	public void painelAdm(Scanner scanner) {
 		this.adminService = new AdminService();
 		System.out.println("Bem-vindo ao Painel ADM \n");
@@ -27,9 +35,11 @@ public class AdminView {
 				break;
 			
 			case "2": 
+				adminService.editarProduto(scanner);
 				break;
 				
 			case "3":
+				adminService.excluirProduto(scanner);
 				break;
 				
 			case "4":
@@ -42,14 +52,6 @@ public class AdminView {
 			}
 			
 		} while(continua);
-	}
-	
-	private void menuPrincipal() {
-		System.out.println("1- Cadastrar Produto");
-		System.out.println("2- Editar Produto");
-		System.out.println("3- Excluir Produto");
-		System.out.println("4- Consultar Produto(s) \n");
-		System.out.println("0- Início");
 	}
 	
 }
