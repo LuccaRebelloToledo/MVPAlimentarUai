@@ -1,19 +1,21 @@
 package br.edu.univas.models;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Extrato {
 	
 	private String clienteCPF;
 	private double valorTotal;
-	private String nomeProd;
-	private int qtdeCompradaProd;
-	private double precoVendaProd;
+	private int qtdeComprada;
+	private Produto produto;
+	private Date dataVenda;
 
-	public Extrato(String clienteCPF, String nomeProd, int qtdeCompradaProd, double precoVendaProd) {
+	public Extrato(String clienteCPF, String nomeProd, Produto produto, int qtdeComprada) {
 			this.clienteCPF = clienteCPF;
-			this.nomeProd = nomeProd;
-			this.qtdeCompradaProd = qtdeCompradaProd;
-			this.precoVendaProd = precoVendaProd;
-			this.valorTotal = qtdeCompradaProd * precoVendaProd;
+			this.valorTotal = this.produto.getPrecoVendaProd() * this.qtdeComprada;
+			this.dataVenda = new Date();
 	}
 	
 	public String getClienteCPF() {
@@ -23,16 +25,34 @@ public class Extrato {
 		return this.valorTotal;
 	}
 
-	public String getNomeProd() {
-		return this.nomeProd;
+	public int getQtdeComprada() {
+		return this.qtdeComprada;
+	}
+	
+	public Date getDataVenda() {
+		return this.dataVenda;
+	}
+	
+	public String getDataVendaFormatada() {
+		SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		return formatador.format(this.getDataVenda());
+	}
+	
+	public String getPrecoVendaProdFormatado() {
+		DecimalFormat precoFormatado = new DecimalFormat();
+		precoFormatado.applyPattern("R$ #,##0.00");
+		return precoFormatado.format(this.produto.getPrecoVendaProd());
 	}
 
-	public int getQtdeCompradaProd() {
-		return this.qtdeCompradaProd;
+	public String toString() {
+		return
+				"\n" +
+				"CPF Comprador: " + this.getClienteCPF() +
+				"Produto: " + this.produto.getNomeProd() +
+				"Qtde Comprada: " + this.getQtdeComprada() +
+				"Valor da Venda: " + this.getPrecoVendaProdFormatado() +
+				"Data/Hora da Venda:" + this.getDataVendaFormatada();
+		
 	}
-
-	public double getPrecoVendaProd() {
-		return this.precoVendaProd;
-	}
-
+	
 }

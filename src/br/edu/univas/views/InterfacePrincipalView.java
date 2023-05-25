@@ -3,13 +3,12 @@ package br.edu.univas.views;
 import java.util.Scanner;
 
 import br.edu.univas.services.AdminService;
-import br.edu.univas.services.ClienteService;
 
 public class InterfacePrincipalView {
 	
 	private Scanner scanner;
 	private AdminService adminService;
-	private ClienteService clienteService;
+	private ClienteView clienteView;
 	
 	private void menuDeOpcoes() {
 			System.out.println("Bem-vindo, escolha uma das opções para continuar :)"
@@ -40,8 +39,8 @@ public class InterfacePrincipalView {
 				break;
 				
 			case "2":
-				this.clienteService = new ClienteService();
-				clienteService.teste();
+				this.clienteView = new ClienteView();
+				clienteView.painelCliente(scanner);
 				break;
 				
 			case "0": 
