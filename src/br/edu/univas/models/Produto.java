@@ -1,5 +1,7 @@
 package br.edu.univas.models;
 
+import java.text.DecimalFormat;
+
 public class Produto {
 	
 	private int codProd;
@@ -67,6 +69,12 @@ public class Produto {
 		this.precoVendaProd = precoVendaProd;
 	}
 	
+	public String getPrecoVendaProdFormatado() {
+		DecimalFormat precoFormatado = new DecimalFormat();
+		precoFormatado.applyPattern("R$ #,##0.00");
+		return precoFormatado.format(this.getPrecoVendaProd());
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		Produto aux = (Produto)obj;
@@ -74,11 +82,11 @@ public class Produto {
 	}
 	
 	public String toString() {
-		return 
+		return 	"\n"+
 				"Código: " + this.getCodProd() + "\n" +
 				"Nome: " + this.getNomeProd() + "\n" +
 				"Marca: " + this.getMarcaProd() + "\n" +
-				"Qtde Estoque: " + this.getQtdeEstoqueProd() + "\n" +
-				"Preço de Venda: " + this.getPrecoVendaProd();
+				"Quantidade no Estoque: " + this.getQtdeEstoqueProd() + "\n" +
+				"Preço de Venda: " + this.getPrecoVendaProdFormatado();
 	}
 }

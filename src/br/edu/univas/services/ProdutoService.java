@@ -45,11 +45,19 @@ public class ProdutoService {
 	}
 	
 	public void deletar(int codProd) {
+		Produto produtoASerExcluido = null;
 		for(Produto prod : dadosProd) {
 			if(prod.getCodProd() == codProd) {
-				dadosProd.remove(prod);
+				produtoASerExcluido = prod;
 			}
 		}
+		if(produtoASerExcluido != null) {
+			dadosProd.remove(produtoASerExcluido);
+		}
+	}
+	
+	public int count() {
+		return ProdutoService.dadosProd.size();
 	}
 	
 }
