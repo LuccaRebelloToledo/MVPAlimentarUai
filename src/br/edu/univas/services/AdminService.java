@@ -142,7 +142,10 @@ public class AdminService {
 	
 	public void consultarExtrato() {
 		extratoService = new ExtratoService();
-		System.out.println(extratoService.consultarExtrato());
+		if(extratoService.count() == 0)
+			System.out.println("Ainda não foi realizado nenhuma venda! \n");
+		else
+			System.out.println(extratoService.consultarExtrato());
 	}
 	
  	private int desejaAlterar(String msgDesejada, Scanner scanner) {

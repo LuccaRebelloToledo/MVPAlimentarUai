@@ -8,21 +8,23 @@ public class Carrinho {
 	private int codProd;
 	private String nomeProd;
 	private double precoVendaProd;
-	private int qtdeDesejada;
+	private int qtdeAComprarProd;
+	private double precoTotal;
 	
-	public Carrinho(Produto produto, int qtdeDesejada) {
+	public Carrinho(Produto produto, int qtdeAComprarProd) {
 		this.codProd = this.produto.getCodProd();
 		this.nomeProd = this.produto.getNomeProd();
-		this.qtdeDesejada = qtdeDesejada;
+		this.qtdeAComprarProd = qtdeAComprarProd;
 		this.precoVendaProd = this.produto.getPrecoVendaProd();
+		this.precoTotal = qtdeAComprarProd*this.produto.getPrecoVendaProd();
 	}
 	
 	public Produto getProduto() {
 		return this.produto;
 	}
 	
-	public int getQtdeDesejada() {
-		return this.qtdeDesejada;
+	public int getQtdeAComprarProd() {
+		return this.qtdeAComprarProd;
 	}
 
 	public int getCodProd() {
@@ -37,10 +39,33 @@ public class Carrinho {
 		return this.precoVendaProd;
 	}
 	
+	public double getPrecoTotal() {
+		return this.precoTotal;
+	}
+	
 	public String getPrecoVendaProdFormatado() {
 		DecimalFormat precoFormatado = new DecimalFormat();
 		precoFormatado.applyPattern("R$ #,##0.00");
 		return precoFormatado.format(this.getPrecoVendaProd());
 	}
-
+	public String getPrecoVendaProdTotalFormatado() {
+		DecimalFormat precoFormatado = new DecimalFormat();
+		precoFormatado.applyPattern("R$ #,##0.00");
+		return precoFormatado.format(this.getPrecoTotal());
+	}
+	
+	public String toString() {
+		return
+				"\n" +
+				"Código: " + this.getCodProd() +
+				"Nome: " + this.getNomeProd() +
+				"Quantidade: " + this.getQtdeAComprarProd() +
+				"Preço: " + this.getPrecoVendaProdTotalFormatado();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Carrinho aux = (Carrinho)obj;
+		return this.codProd == aux.getCodProd();
+	}
 }

@@ -55,4 +55,10 @@ public class Extrato {
 		
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		Extrato aux = (Extrato)obj;
+		return this.produto.getCodProd() == aux.produto.getCodProd();
+	}
+	
 }
