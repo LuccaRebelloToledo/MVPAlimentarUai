@@ -20,7 +20,7 @@ public class ProdutoService {
 		dadosProd.add(produto);
 	}
 	
-	public Produto procurar(int codProd) {
+	public Produto consultar(int codProd) {
 		for(Produto prod : dadosProd) {
 			if(prod.getCodProd() == codProd) {
 				return prod.clone();
@@ -29,7 +29,7 @@ public class ProdutoService {
 		return null;
 	}
 	
-	public List<Object> procurar(){
+	public List<Object> consultar(){
 		return Arrays.asList(dadosProd.clone());
 	}
 	
@@ -57,7 +57,7 @@ public class ProdutoService {
 	}
 	
 	public int count() {
-		return ProdutoService.dadosProd.size();
+		return dadosProd.size();
 	}
 	
 }

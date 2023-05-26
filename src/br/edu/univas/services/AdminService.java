@@ -9,6 +9,7 @@ import br.edu.univas.views.InterfacePrincipalView;
 public class AdminService {
 	
 	private ProdutoService produtoService;
+	private ExtratoService extratoService;
 	private String senhaAdm = "123456";
 	private InterfacePrincipalView alimentarUai;
 	private AdminView adminView;
@@ -68,7 +69,7 @@ public class AdminService {
 		int codProdInformado = scanner.nextInt();
 		scanner.nextLine();
 		ProdutoService produto = new ProdutoService();
-		Produto prodEncontrado = produto.procurar(codProdInformado);
+		Produto prodEncontrado = produto.consultar(codProdInformado);
 		if(prodEncontrado != null) {
 			int escolha = 0;
 			escolha = this.desejaAlterar("Você deseja alterar o nome do produto: ", scanner);
@@ -113,7 +114,7 @@ public class AdminService {
 		int codProdInformado = scanner.nextInt();
 		scanner.nextLine();
 		ProdutoService produto = new ProdutoService();
-		Produto prodEncontrado = produto.procurar(codProdInformado);
+		Produto prodEncontrado = produto.consultar(codProdInformado);
 		if(prodEncontrado != null) {
 			produto.deletar(codProdInformado);
 			System.out.println("Produto excluído! \n");
@@ -129,14 +130,19 @@ public class AdminService {
 			System.out.println("Nenhum produto encontrado! \n");
 		} else {
 		System.out.println("Deseja procurar um produto específico? Se sim, informe o ID, caso contrario digite 0");
-		int resposta = scanner.nextInt();
+		int codProdInformado = scanner.nextInt();
 		scanner.nextLine();
 		
-		if(resposta == 0) 
-			System.out.println(produtoService.procurar());
+		if(codProdInformado == 0) 
+			System.out.println(produtoService.consultar());
 		 else 
-			System.out.println(produtoService.procurar(resposta));
+			System.out.println(produtoService.consultar(codProdInformado));
 		}
+	}
+	
+	public void consultarExtrato() {
+		extratoService = new ExtratoService();
+		System.out.println(extratoService.consultarExtrato());
 	}
 	
  	private int desejaAlterar(String msgDesejada, Scanner scanner) {

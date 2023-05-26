@@ -16,7 +16,8 @@ public class AdminView {
 		System.out.println("1- Cadastrar Produto");
 		System.out.println("2- Editar Produto");
 		System.out.println("3- Excluir Produto");
-		System.out.println("4- Consultar Produto(s) \n");
+		System.out.println("4- Consultar Produto(s)");
+		System.out.println("5- Consultar Extrato de Venda");
 		System.out.println("0- Início");
 	}
 	
@@ -44,6 +45,9 @@ public class AdminView {
 				
 			case "4":
 				adminService.consultarProduto(scanner);
+				break;
+			case "5":
+				adminService.consultarExtrato();
 				break;
 				
 			case "0":

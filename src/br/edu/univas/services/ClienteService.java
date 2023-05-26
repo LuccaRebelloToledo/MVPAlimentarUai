@@ -1,16 +1,16 @@
 package br.edu.univas.services;
 
-import java.util.ArrayList;
-
-import br.edu.univas.models.Extrato;
-
 public class ClienteService {
 	
-	private static ArrayList<Extrato> dadosCarinho;
+	private ProdutoService produtoService;
 	
 	public ClienteService() {
-		if(dadosCarinho == null)
-			dadosCarinho = new ArrayList<>();
+		
+	}
+	
+	public void consultarProdutos() {
+		produtoService = new ProdutoService();
+		System.out.println(produtoService.consultar());
 	}
 	
 }
