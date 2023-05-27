@@ -15,23 +15,26 @@ public class ClienteService {
 	
 	public void consultarProdutos(Scanner scanner) {
 		this.produtoService = new ProdutoService();
-		if(produtoService.count() == 0) {
+		if(produtoService.possuiProduto()) {
+			System.out.println("Deseja procurar um produto específico? Se sim, informe o ID, caso contrario digite 0");
+			int codProdInformado = scanner.nextInt();
+			scanner.nextLine();
+			
+			if(codProdInformado == 0) 
+				System.out.println(produtoService.consultar());
+			 else 
+				System.out.println(produtoService.consultar(codProdInformado));
+			
+		} else
 			System.out.println("Nenhum produto encontrado! \n");
-		} else {
-		System.out.println("Deseja procurar um produto específico? Se sim, informe o ID, caso contrario digite 0");
-		int codProdInformado = scanner.nextInt();
-		scanner.nextLine();
-		
-		if(codProdInformado == 0) 
-			System.out.println(produtoService.consultar());
-		 else 
-			System.out.println(produtoService.consultar(codProdInformado));
-		}
 	}
 	
 	public void consultarCarrinho() {
 		this.carrinhoService = new CarrinhoService();
-		System.out.println(carrinhoService.consultarCarrinho());
+		if(carrinhoService.possuiCarrinho())
+			System.out.println(carrinhoService.consultarCarrinho());
+		else
+			System.out.println("O carrinho está vazio! \n");	
 	}
 	
 	
@@ -58,6 +61,8 @@ public class ClienteService {
 	}
 	
 	public void editarExcluirCarrinho(Scanner scanner) {
+		this.carrinhoService = new CarrinhoService();
+		if(carrinhoService.possuiCarrinho()) {
 		System.out.println(
 				"Deseja editar ou excluir um produto? \n" +
 				"1- Editar \n"+
@@ -65,22 +70,47 @@ public class ClienteService {
 		int escolha = scanner.nextInt();
 		scanner.nextLine();
 		if(escolha == 1) 
-			editarProdCarrinho(scanner);
+			editarProdCarrinho(scanner, carrinhoService);
 		 else if (escolha == 2) 
-			excluirProdCarrinho(scanner);
+			excluirProdCarrinho(scanner, carrinhoService);
 		 else
 			System.out.println("Escolha incorreta! \n");
+		}
+		else
+			System.out.println("Você não possui nenhum item no carrinho! \n");
 	}
 	
-	public void editarProdCarrinho(Scanner scanner) {
+	public void editarProdCarrinho(Scanner scanner, CarrinhoService carrinhoService) {
+		System.out.print("Digite o código do produto que deseja editar: ");
+		int codProd = scanner.nextInt();
+		scanner.nextLine();	
+		carrinhoService.editarProdCarrinho(codProd, scanner);
+		System.out.println("Carrinho atualizado! \n");
 		
 	}
 	
-	public void excluirProdCarrinho(Scanner scanner) {
-		
+	public void excluirProdCarrinho(Scanner scanner, CarrinhoService carrinhoService) {
+		System.out.print("Digite o código do produto que deseja excluir do carrinho: ");
+		int codProd = scanner.nextInt();
+		scanner.nextLine();
+		carrinhoService.removerProdCarinho(codProd);
+		System.out.println("Produto excluído do carrinho! \n");
 	}
 	
 	public void efetuarPagamento(Scanner scanner) {
-		
+		carrinhoService = new CarrinhoService();
+		if(carrinhoService.possuiCarrinho()) {
+			System.out.println(carrinhoService.consultarCarrinho());
+			System.out.println("Valor total do Carrinho: " + carrinhoService.totalCarrinhoFormatado());
+			System.out.print("Deseja efetuar o pagamento do carrinho ('S' para SIM,'N' para não): ");
+			String escolha = scanner.nextLine();
+			if(escolha.toUpperCase().equals("S")) {
+				System.out.println("Por favor digite seu CPF: ");
+				String clienteCPF = scanner.nextLine();
+				System.out.println("Por favor digite a forma de pagamento: ");
+				String formaDePagamento = scanner.nextLine();
+			}
+		} else
+			System.out.println("O carrinho está vazio! \n");
 	}
 }

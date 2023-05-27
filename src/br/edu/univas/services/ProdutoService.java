@@ -56,8 +56,15 @@ public class ProdutoService {
 		}
 	}
 	
-	public int count() {
+	private int count() {
 		return dadosProd.size();
+	}
+	
+	public boolean possuiProduto() {
+		if(count() > 0)
+			return true;
+		else
+			return false;
 	}
 	
 }

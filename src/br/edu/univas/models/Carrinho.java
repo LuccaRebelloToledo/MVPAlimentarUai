@@ -38,6 +38,14 @@ public class Carrinho {
 		return this.precoTotal;
 	}
 	
+	public void setQtdeAComprarProd(int qtdeAComprarProd) {
+		this.qtdeAComprarProd = qtdeAComprarProd;
+	}
+	
+	public void setPrecoTotal(int novaQuantidade) {
+		this.precoTotal = this.getPrecoVendaProd()*novaQuantidade;
+	}
+	
 	public String getPrecoVendaProdFormatado() {
 		DecimalFormat precoFormatado = new DecimalFormat();
 		precoFormatado.applyPattern("R$ #,##0.00");
@@ -51,11 +59,11 @@ public class Carrinho {
 	
 	public String toString() {
 		return
-				"\n" +
-				"Código: " + this.getCodProd() +
-				"Nome: " + this.getNomeProd() +
-				"Quantidade: " + this.getQtdeAComprarProd() +
-				"Preço: " + this.getPrecoVendaProdTotalFormatado();
+				"Código: " + this.getCodProd() + " " +
+				"Nome: " + this.getNomeProd() + " " +
+				"Quantidade: " + this.getQtdeAComprarProd() + " " +
+				"Preço do produto: " + this.getPrecoVendaProdFormatado() + " " +
+				"Total: " + this.getPrecoVendaProdTotalFormatado() + "\n";
 	}
 	
 	@Override

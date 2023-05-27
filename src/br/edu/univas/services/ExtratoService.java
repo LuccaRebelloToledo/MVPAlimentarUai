@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import br.edu.univas.models.Carrinho;
 import br.edu.univas.models.Extrato;
-import br.edu.univas.models.Produto;
 
 public class ExtratoService {
 	
@@ -16,8 +16,8 @@ public class ExtratoService {
 			dadosExtrato = new ArrayList<>();
 	}
 	
-	public void cadastrarExtrato(String clienteCPF, String nomeProd, Produto produto, int qtdeComprada) {
-		Extrato produtoExtrato = new Extrato(clienteCPF, nomeProd, produto, qtdeComprada);
+	public void cadastrarExtrato(String clienteCPF, String formaDePagamento, Carrinho prodCarrinho) {
+		Extrato produtoExtrato = new Extrato(clienteCPF, formaDePagamento, prodCarrinho);
 		dadosExtrato.add(produtoExtrato);
 	}
 	
@@ -25,8 +25,15 @@ public class ExtratoService {
 		return Arrays.asList(dadosExtrato.clone());
 	}
 	
-	public int count() {
+	private int count() {
 		return dadosExtrato.size();
+	}
+	
+	public boolean possuiExtrato() {
+		if(count() > 0)
+			return true;
+		else
+			return false;
 	}
 
 }

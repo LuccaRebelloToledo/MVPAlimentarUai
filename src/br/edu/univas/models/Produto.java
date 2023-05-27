@@ -82,11 +82,11 @@ public class Produto {
 	}
 	
 	public String toString() {
-		return 	"\n"+
-				"Código: " + this.getCodProd() + "\n" +
-				"Nome: " + this.getNomeProd() + "\n" +
-				"Marca: " + this.getMarcaProd() + "\n" +
-				"Quantidade no Estoque: " + this.getQtdeEstoqueProd() + "\n" +
-				"Preço de Venda: " + this.getPrecoVendaProdFormatado();
+		return 	
+				"Código: " + this.getCodProd() + " " +
+				"Nome: " + this.getNomeProd() + " " +
+				"Marca: " + this.getMarcaProd() + " " +
+				"Quantidade no Estoque: " + this.getQtdeEstoqueProd() + " " +
+				"Preço de Venda: " + this.getPrecoVendaProdFormatado() + "\n";
 	}
 }

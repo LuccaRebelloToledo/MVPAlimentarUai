@@ -57,95 +57,94 @@ public class AdminService {
 		}
 		this.produtoService = new ProdutoService();
 		produtoService.cadastrarProduto(nomeProd, marcaProd, qtdeEstoqueProd, precoDeVendaProd);
-		System.out.println("Produto Cadastrado");
+		System.out.println("Produto cadastrado! \n");
 	}
 	
 	public void editarProduto(Scanner scanner){
 		this.produtoService = new ProdutoService();
-		if(produtoService.count() == 0) {
-			System.out.println("Cadastre um produto primeiro! \n");
-		} else {
-		System.out.print("Digite o ID do produto que deseje editar: ");
-		int codProdInformado = scanner.nextInt();
-		scanner.nextLine();
-		ProdutoService produto = new ProdutoService();
-		Produto prodEncontrado = produto.consultar(codProdInformado);
-		if(prodEncontrado != null) {
-			int escolha = 0;
-			escolha = this.desejaAlterar("Você deseja alterar o nome do produto: ", scanner);
-			if(escolha == 1) {
-				System.out.print("Digite o novo nome do produto: ");
-				prodEncontrado.setNomeProd(scanner.nextLine());
-			}
-			escolha = 0;
-			escolha = this.desejaAlterar("Você deseja alterar a marca do produto: ", scanner);
-			if(escolha == 1) {
-				System.out.print("Digite a nova marca do produto: ");
-				prodEncontrado.setMarcaProd(scanner.nextLine());
-			}
-			escolha = 0;
-			escolha = this.desejaAlterar("Você deseja alterar o estoque atual do produto: ", scanner);
-			if(escolha == 1) {
-				System.out.print("Digite a nova quantidade de estoque do produto: ");
-				prodEncontrado.setQtdeEstoqueProd(scanner.nextInt());
-				scanner.nextLine();
-			}
-			escolha = 0;
-			escolha = this.desejaAlterar("Você deseja alterar o preço de venda do produto: ", scanner);
-			if(escolha == 1) {
-				System.out.print("Digite o novo preço de venda do produto: ");
-				prodEncontrado.setPrecoVendaProd(scanner.nextDouble());
-				scanner.nextLine();
-			}
-			produto.atualizar(prodEncontrado);
-			System.out.println("Produto atualizado! \n");
-		} else {
-			System.out.println("Produto não encontrado \n");
-		}
-	}
+		if(produtoService.possuiProduto()) {
+			System.out.print("Digite o ID do produto que deseje editar: ");
+			int codProdInformado = scanner.nextInt();
+			scanner.nextLine();
+			ProdutoService produto = new ProdutoService();
+			Produto prodEncontrado = produto.consultar(codProdInformado);
+			if(prodEncontrado != null) {
+				int escolha = 0;
+				escolha = this.desejaAlterar("Você deseja alterar o nome do produto: ", scanner);
+				if(escolha == 1) {
+					System.out.print("Digite o novo nome do produto: ");
+					prodEncontrado.setNomeProd(scanner.nextLine());
+				}
+				escolha = 0;
+				escolha = this.desejaAlterar("Você deseja alterar a marca do produto: ", scanner);
+				if(escolha == 1) {
+					System.out.print("Digite a nova marca do produto: ");
+					prodEncontrado.setMarcaProd(scanner.nextLine());
+				}
+				escolha = 0;
+				escolha = this.desejaAlterar("Você deseja alterar o estoque atual do produto: ", scanner);
+				if(escolha == 1) {
+					System.out.print("Digite a nova quantidade de estoque do produto: ");
+					prodEncontrado.setQtdeEstoqueProd(scanner.nextInt());
+					scanner.nextLine();
+				}
+				escolha = 0;
+				escolha = this.desejaAlterar("Você deseja alterar o preço de venda do produto: ", scanner);
+				if(escolha == 1) {
+					System.out.print("Digite o novo preço de venda do produto: ");
+					prodEncontrado.setPrecoVendaProd(scanner.nextDouble());
+					scanner.nextLine();
+				}
+				produto.atualizar(prodEncontrado);
+				System.out.println("Produto atualizado! \n");
+			} 
+			else 
+				System.out.println("Produto não encontrado \n");
+		} 	else 
+				System.out.println("Cadastre um produto primeiro! \n");
 }
 	
 	public void excluirProduto(Scanner scanner) {
 		this.produtoService = new ProdutoService();
-		if(produtoService.count() == 0) {
+		if(produtoService.possuiProduto()) {
+			System.out.print("Digite o ID do produto que deseje editar: ");
+			int codProdInformado = scanner.nextInt();
+			scanner.nextLine();
+			ProdutoService produto = new ProdutoService();
+			Produto prodEncontrado = produto.consultar(codProdInformado);
+			if(prodEncontrado != null) {
+				produto.deletar(codProdInformado);
+				System.out.println("Produto excluído! \n");
+			}
+			else
+				System.out.println("Produto não encontrado! \n");
+			
+		} else 
 			System.out.println("Cadastre um produto primeiro! \n");
-		} else {
-		System.out.print("Digite o ID do produto que deseje editar: ");
-		int codProdInformado = scanner.nextInt();
-		scanner.nextLine();
-		ProdutoService produto = new ProdutoService();
-		Produto prodEncontrado = produto.consultar(codProdInformado);
-		if(prodEncontrado != null) {
-			produto.deletar(codProdInformado);
-			System.out.println("Produto excluído! \n");
-		}
-		else
-			System.out.println("Produto não encontrado! \n");
-		}
 	}
 	
 	public void consultarProduto(Scanner scanner) {
 		this.produtoService = new ProdutoService();
-		if(produtoService.count() == 0) {
-			System.out.println("Nenhum produto encontrado! \n");
-		} else {
-		System.out.println("Deseja procurar um produto específico? Se sim, informe o ID, caso contrario digite 0");
-		int codProdInformado = scanner.nextInt();
-		scanner.nextLine();
-		
-		if(codProdInformado == 0) 
-			System.out.println(produtoService.consultar());
-		 else 
-			System.out.println(produtoService.consultar(codProdInformado));
-		}
+		if(produtoService.possuiProduto()) {
+			System.out.println("Deseja procurar um produto específico? Se sim, informe o ID, caso contrario digite 0");
+			int codProdInformado = scanner.nextInt();
+			scanner.nextLine();
+			
+			if(codProdInformado == 0) 
+				System.out.println(produtoService.consultar());
+			 else 
+				System.out.println(produtoService.consultar(codProdInformado));
+			
+		} else
+			System.out.println("Nenhum produto encontrado! \n");	
 	}
 	
 	public void consultarExtrato() {
 		extratoService = new ExtratoService();
-		if(extratoService.count() == 0)
-			System.out.println("Ainda não foi realizado nenhuma venda! \n");
+		if(extratoService.possuiExtrato())
+			System.out.println(extratoService.consultarExtrato());	
 		else
-			System.out.println(extratoService.consultarExtrato());
+			System.out.println("Ainda não foi realizado nenhuma venda! \n");
 	}
 	
  	private int desejaAlterar(String msgDesejada, Scanner scanner) {
