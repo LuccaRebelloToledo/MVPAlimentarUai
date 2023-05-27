@@ -1,6 +1,8 @@
 package br.edu.univas.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import br.edu.univas.models.Carrinho;
 import br.edu.univas.models.Produto;
@@ -14,8 +16,8 @@ public class CarrinhoService {
 			dadosCarrinho = new ArrayList<>();
 	}
 	
-	public void adicionarAoCarrinho(Produto produto, int qtdeAComprarProd) {
-			if(temNoCarrinho(produto))
+	public void adicionarAoCarrinho(int codProd, Produto produto, int qtdeAComprarProd) {
+			if(temNoCarrinho(codProd))
 				System.out.println("O produto já existe no carrinho! \n");
 			else {
 				Carrinho carrinho = new Carrinho(produto, qtdeAComprarProd);
@@ -23,13 +25,17 @@ public class CarrinhoService {
 				}
 	}
 	
-	public boolean temNoCarrinho(Produto prodInformado) {
+	public boolean temNoCarrinho(int prodInformado) {
 		for(Carrinho prodCarrinho : dadosCarrinho) {
-			if(prodCarrinho.getCodProd() == prodInformado.getCodProd()) {
+			if(prodCarrinho.getCodProd() == prodInformado) {
 				return true;
 			}
 		}
 		return false;
+	}
+	
+	public List<Object> consultarCarrinho(){
+		return Arrays.asList(dadosCarrinho.clone());
 	}
 	
 	public void removerDoCarinho(int codProd) {

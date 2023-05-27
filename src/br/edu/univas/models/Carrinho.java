@@ -4,7 +4,6 @@ import java.text.DecimalFormat;
 
 public class Carrinho {
 	
-	private Produto produto;
 	private int codProd;
 	private String nomeProd;
 	private double precoVendaProd;
@@ -12,15 +11,11 @@ public class Carrinho {
 	private double precoTotal;
 	
 	public Carrinho(Produto produto, int qtdeAComprarProd) {
-		this.codProd = this.produto.getCodProd();
-		this.nomeProd = this.produto.getNomeProd();
+		this.codProd = produto.getCodProd();
+		this.nomeProd = produto.getNomeProd();
 		this.qtdeAComprarProd = qtdeAComprarProd;
-		this.precoVendaProd = this.produto.getPrecoVendaProd();
-		this.precoTotal = qtdeAComprarProd*this.produto.getPrecoVendaProd();
-	}
-	
-	public Produto getProduto() {
-		return this.produto;
+		this.precoVendaProd = produto.getPrecoVendaProd();
+		this.precoTotal = qtdeAComprarProd*produto.getPrecoVendaProd();
 	}
 	
 	public int getQtdeAComprarProd() {

@@ -18,7 +18,10 @@ public class ClienteView {
 	
 	private void menuCarrinho() {
 		System.out.println(
-				"1- Adicionar ao carrinho \n"+
+				"1- Consultar o carrinho de compras \n"+
+				"2- Adicionar ao carrinho de compras \n"+
+				"3- Editar/Excluir carrinho de compras \n"+
+				"4- Efetuar pagamento do carrinho de compras \n"+
 				"0- Voltar");
 	}
 	
@@ -35,7 +38,7 @@ public class ClienteView {
 				clienteService.consultarProdutos(scanner);
 				break;
 			case "2":
-				carrinho(scanner);
+				carrinhoCliente(scanner);
 				break;
 			case "0":
 				continua = false;
@@ -44,9 +47,10 @@ public class ClienteView {
 		} while (continua);
 	}
 	
-	private void carrinho(Scanner scanner) {
+	private void carrinhoCliente(Scanner scanner) {
 		boolean continua = true;
 		String opcao = "";
+		this.clienteService = new ClienteService();
 		do {
 			menuCarrinho();
 			opcao = scanner.nextLine();
@@ -54,10 +58,19 @@ public class ClienteView {
 			switch(opcao) {
 				
 			case "1":
-				this.clienteService = new ClienteService();
+				clienteService.consultarCarrinho();
+				break;
+			case "2":
 				clienteService.adicionarProdutoAoCarrinho(scanner);
 				break;
+			case "3":
+				clienteService.editarExcluirCarrinho(scanner);
+				break;
+			case "4":
+				clienteService.efetuarPagamento(scanner);
+				break;
 			case "0":
+				continua = false;
 				break;
 			default:
 				System.out.println("Opção Inválida! \n");
