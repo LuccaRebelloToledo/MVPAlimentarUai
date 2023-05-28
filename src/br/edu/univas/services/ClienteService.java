@@ -52,7 +52,7 @@ public class ClienteService {
 			scanner.nextLine();
 			
 			if(qtdeAComprar > produto.getQtdeEstoqueProd())
-				System.out.println("Quantidade solicitada maior que a dispónivel no estoque! \n");
+				System.out.println("Quantidade solicitada maior que a disponível no estoque! \n");
 			else {
 				this.carrinhoService = new CarrinhoService();
 				carrinhoService.adicionarAoCarrinho(codProd, produto, qtdeAComprar);
@@ -85,9 +85,7 @@ public class ClienteService {
 		System.out.print("Digite o código do produto que deseja editar: ");
 		int codProd = scanner.nextInt();
 		scanner.nextLine();	
-		carrinhoService.editarProdCarrinho(codProd, scanner);
-		System.out.println("Carrinho atualizado! \n");
-		
+		carrinhoService.editarProdCarrinho(codProd, scanner);	
 	}
 	
 	public void excluirProdCarrinho(Scanner scanner, CarrinhoService carrinhoService) {
@@ -108,11 +106,16 @@ public class ClienteService {
 			if(escolha.toUpperCase().equals("S")) {
 				System.out.println("Por favor digite seu CPF: ");
 				String clienteCPF = scanner.nextLine();
-				System.out.println("Por favor digite a forma de pagamento: ");
-				String formaDePagamento = scanner.nextLine();
-				this.extratoService = new ExtratoService();
-				carrinhoService.gerarExtrato(clienteCPF, formaDePagamento, extratoService);
-				System.out.println("Compra finalizada! \n");
+				if(clienteCPF.length() != 11) {
+					System.out.println("Por favor digite a forma de pagamento: ");
+					String formaDePagamento = scanner.nextLine();
+					this.extratoService = new ExtratoService();
+					this.produtoService = new ProdutoService();
+					carrinhoService.gerarExtrato(clienteCPF, formaDePagamento, extratoService, produtoService);
+					System.out.println("Compra finalizada! \n");
+				} else
+					System.out.println("CPF Inválido! \n");
+				
 			}
 		} else
 			System.out.println("O carrinho está vazio! \n");

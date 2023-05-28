@@ -25,6 +25,7 @@ public class CarrinhoService {
 			else {
 				Carrinho carrinho = new Carrinho(produto, qtdeAComprarProd);
 				dadosCarrinho.add(carrinho);
+				System.out.println("Produto " + carrinho.getCodProd() + " adicionado com sucesso! \n");
 				}
 	}
 	
@@ -65,10 +66,11 @@ public class CarrinhoService {
 			this.produtoService = new ProdutoService();
 			Produto produto = produtoService.consultar(codProd);
 			if(novaQuantidade > produto.getQtdeEstoqueProd())
-				System.out.println("Quantidade maior que dispónivel no estoque! \n");
+				System.out.println("Quantidade maior que disponível no estoque! \n");
 			else {
 				prodParaEditar.setQtdeAComprarProd(novaQuantidade);
 				atualizar(prodParaEditar);
+				System.out.println("Produto" + prodParaEditar.getCodProd() + " atualizado! \n");
 			}
 		} else
 			System.out.println("Produto não encontrado no carrinho! \n");
@@ -96,8 +98,11 @@ public class CarrinhoService {
 		}
 	}
 	
-	public void gerarExtrato(String clienteCPF, String formaDePagamento, ExtratoService extratoService) {
+	public void gerarExtrato(String clienteCPF, String formaDePagamento, ExtratoService extratoService, ProdutoService produtoService) {
 		for(Carrinho prod : dadosCarrinho) {
+			Produto prodAtual = produtoService.consultar(prod.getCodProd());
+			prodAtual.setQtdeEstoqueProd(prodAtual.getQtdeEstoqueProd() - prod.getQtdeAComprarProd());
+			produtoService.atualizar(prodAtual);
 			extratoService.cadastrarExtrato(clienteCPF, formaDePagamento, prod);
 		}
 		deletarCarinho();

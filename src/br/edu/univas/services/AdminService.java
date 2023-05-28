@@ -147,8 +147,14 @@ public class AdminService {
 			
 			if(codProdInformado == 0) 
 				System.out.println(produtoService.consultar());
-			 else 
-				System.out.println(produtoService.consultar(codProdInformado));
+			 else {
+				 Produto prodSolicitado = produtoService.consultar(codProdInformado);
+				 if(prodSolicitado != null) 
+					 System.out.println(produtoService.consultar(codProdInformado));
+				 else
+					 System.out.println("Produto inexistente! \n");
+			 }
+				
 			
 		} else
 			System.out.println("Nenhum produto encontrado! \n");	
@@ -163,7 +169,7 @@ public class AdminService {
 	}
 	
  	private int desejaAlterar(String msgDesejada, Scanner scanner) {
- 		System.out.print(msgDesejada + " (1 = Sim, 0 = Nao)");
+ 		System.out.print(msgDesejada + " (1 = Sim, 0 = Nao): ");
  		int escolha = scanner.nextInt();
  		scanner.nextLine();	
  		return escolha;

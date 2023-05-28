@@ -33,6 +33,10 @@ public class InterfacePrincipalView {
 			
 			switch(opcao) {
 			
+			default:
+				System.out.println("Opção Inválida! \n");
+				break;
+			
 			case "1":
 				this.adminService = new AdminService();
 				adminService.validacaoAdm(scanner);

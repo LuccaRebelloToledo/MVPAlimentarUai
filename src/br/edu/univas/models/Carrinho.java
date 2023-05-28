@@ -59,10 +59,10 @@ public class Carrinho {
 	
 	public String toString() {
 		return
-				"Código: " + this.getCodProd() + " " +
-				"Nome: " + this.getNomeProd() + " " +
-				"Quantidade: " + this.getQtdeAComprarProd() + " " +
-				"Preço do produto: " + this.getPrecoVendaProdFormatado() + " " +
+				"Código: " + this.getCodProd() + " | " +
+				"Nome: " + this.getNomeProd() + " | " +
+				"Quantidade: " + this.getQtdeAComprarProd() + " | " +
+				"Preço do produto: " + this.getPrecoVendaProdFormatado() + " | " +
 				"Total: " + this.getPrecoVendaProdTotalFormatado() + "\n";
 	}
 	

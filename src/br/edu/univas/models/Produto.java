@@ -83,10 +83,10 @@ public class Produto {
 	
 	public String toString() {
 		return 	
-				"Código: " + this.getCodProd() + " " +
-				"Nome: " + this.getNomeProd() + " " +
-				"Marca: " + this.getMarcaProd() + " " +
-				"Quantidade no Estoque: " + this.getQtdeEstoqueProd() + " " +
+				"Código: " + this.getCodProd() + " | " +
+				"Nome: " + this.getNomeProd() + " | " +
+				"Marca: " + this.getMarcaProd() + " | " +
+				"Quantidade no Estoque: " + this.getQtdeEstoqueProd() + " | " +
 				"Preço de Venda: " + this.getPrecoVendaProdFormatado() + "\n";
 	}
 }
