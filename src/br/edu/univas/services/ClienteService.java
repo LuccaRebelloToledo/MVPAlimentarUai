@@ -8,6 +8,7 @@ public class ClienteService {
 	
 	private ProdutoService produtoService;
 	private CarrinhoService carrinhoService;
+	private ExtratoService extratoService;
 	
 	public ClienteService() {
 		
@@ -109,6 +110,9 @@ public class ClienteService {
 				String clienteCPF = scanner.nextLine();
 				System.out.println("Por favor digite a forma de pagamento: ");
 				String formaDePagamento = scanner.nextLine();
+				this.extratoService = new ExtratoService();
+				carrinhoService.gerarExtrato(clienteCPF, formaDePagamento, extratoService);
+				System.out.println("Compra finalizada! \n");
 			}
 		} else
 			System.out.println("O carrinho está vazio! \n");

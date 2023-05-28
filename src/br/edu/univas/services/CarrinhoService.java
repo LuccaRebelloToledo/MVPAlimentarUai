@@ -12,6 +12,7 @@ import br.edu.univas.models.Produto;
 public class CarrinhoService {
 	
 	private static ArrayList<Carrinho> dadosCarrinho;
+	private ProdutoService produtoService;
 	
 	public CarrinhoService() {
 		if(dadosCarrinho == null)
@@ -40,19 +41,35 @@ public class CarrinhoService {
 		return Arrays.asList(dadosCarrinho.clone());
 	}
 	
-	public void editarProdCarrinho(int codProd, Scanner scanner) {		
-		Carrinho prodParaEditar = null;
-		for(Carrinho prodCarrinho : dadosCarrinho) {
-			if(prodCarrinho.getCodProd() == codProd) {
-				prodParaEditar = prodCarrinho;
+	public Carrinho prodCarrinho(int codProd) {		
+		Carrinho prodCarrinho = null;
+		for(Carrinho prod : dadosCarrinho) {
+			if(prod.getCodProd() == codProd) {
+				prodCarrinho = prod;
 			}
 		}
+		if(prodCarrinho != null)
+			return prodCarrinho;
+		else
+			return null;
+	}
+	
+	public void editarProdCarrinho(int codProd, Scanner scanner) {		
+		Carrinho prodParaEditar = prodCarrinho(codProd);
 		if(prodParaEditar != null) {
 			System.out.println("Quantidade atual do produto no carrinho: " + prodParaEditar.getQtdeAComprarProd());
 			System.out.print("Qual a nova quantidade do produto: ");
-			prodParaEditar.setQtdeAComprarProd(scanner.nextInt());
+			int novaQuantidade = scanner.nextInt();
 			scanner.nextLine();
-			atualizar(prodParaEditar);
+			
+			this.produtoService = new ProdutoService();
+			Produto produto = produtoService.consultar(codProd);
+			if(novaQuantidade > produto.getQtdeEstoqueProd())
+				System.out.println("Quantidade maior que dispónivel no estoque! \n");
+			else {
+				prodParaEditar.setQtdeAComprarProd(novaQuantidade);
+				atualizar(prodParaEditar);
+			}
 		} else
 			System.out.println("Produto não encontrado no carrinho! \n");
 	}
@@ -77,6 +94,13 @@ public class CarrinhoService {
 				prod.setPrecoTotal(produtoInformado.getQtdeAComprarProd());
 			}
 		}
+	}
+	
+	public void gerarExtrato(String clienteCPF, String formaDePagamento, ExtratoService extratoService) {
+		for(Carrinho prod : dadosCarrinho) {
+			extratoService.cadastrarExtrato(clienteCPF, formaDePagamento, prod);
+		}
+		deletarCarinho();
 	}
 	
 	public double totalCarrinho() {

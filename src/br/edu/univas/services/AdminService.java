@@ -2,6 +2,7 @@ package br.edu.univas.services;
 
 import java.util.Scanner;
 
+import br.edu.univas.models.Carrinho;
 import br.edu.univas.models.Produto;
 import br.edu.univas.views.AdminView;
 import br.edu.univas.views.InterfacePrincipalView;
@@ -13,6 +14,7 @@ public class AdminService {
 	private String senhaAdm = "123456";
 	private InterfacePrincipalView alimentarUai;
 	private AdminView adminView;
+	private CarrinhoService carrinhoService;
 	
 	public AdminService() {
 		
@@ -75,12 +77,14 @@ public class AdminService {
 					System.out.print("Digite o novo nome do produto: ");
 					prodEncontrado.setNomeProd(scanner.nextLine());
 				}
+				
 				escolha = 0;
 				escolha = this.desejaAlterar("Você deseja alterar a marca do produto: ", scanner);
 				if(escolha == 1) {
 					System.out.print("Digite a nova marca do produto: ");
 					prodEncontrado.setMarcaProd(scanner.nextLine());
 				}
+				
 				escolha = 0;
 				escolha = this.desejaAlterar("Você deseja alterar o estoque atual do produto: ", scanner);
 				if(escolha == 1) {
@@ -88,6 +92,16 @@ public class AdminService {
 					prodEncontrado.setQtdeEstoqueProd(scanner.nextInt());
 					scanner.nextLine();
 				}
+				
+				this.carrinhoService = new CarrinhoService();
+				Carrinho prodNoCarrinho = carrinhoService.prodCarrinho(prodEncontrado.getCodProd());
+				if(prodNoCarrinho != null) {
+					if(prodEncontrado.getQtdeEstoqueProd() < prodNoCarrinho.getQtdeAComprarProd()) {
+						prodNoCarrinho.setQtdeAComprarProd(prodEncontrado.getQtdeEstoqueProd());
+						carrinhoService.atualizar(prodNoCarrinho);
+					}
+				}
+				
 				escolha = 0;
 				escolha = this.desejaAlterar("Você deseja alterar o preço de venda do produto: ", scanner);
 				if(escolha == 1) {
@@ -95,6 +109,7 @@ public class AdminService {
 					prodEncontrado.setPrecoVendaProd(scanner.nextDouble());
 					scanner.nextLine();
 				}
+				
 				produto.atualizar(prodEncontrado);
 				System.out.println("Produto atualizado! \n");
 			} 
