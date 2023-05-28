@@ -104,10 +104,11 @@ public class ClienteService {
 			System.out.print("Deseja efetuar o pagamento do carrinho ('S' para SIM,'N' para não): ");
 			String escolha = scanner.nextLine();
 			if(escolha.toUpperCase().equals("S")) {
-				System.out.println("Por favor digite seu CPF: ");
+				System.out.println("Formato CPF: 00000000000");
+				System.out.print("Por favor digite seu CPF: ");
 				String clienteCPF = scanner.nextLine();
 				if(clienteCPF.length() != 11) {
-					System.out.println("Por favor digite a forma de pagamento: ");
+					System.out.print("Por favor digite a forma de pagamento: ");
 					String formaDePagamento = scanner.nextLine();
 					this.extratoService = new ExtratoService();
 					this.produtoService = new ProdutoService();
