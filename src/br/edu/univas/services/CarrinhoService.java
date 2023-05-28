@@ -70,7 +70,7 @@ public class CarrinhoService {
 			else {
 				prodParaEditar.setQtdeAComprarProd(novaQuantidade);
 				atualizar(prodParaEditar);
-				System.out.println("Produto" + prodParaEditar.getCodProd() + " atualizado! \n");
+				System.out.println("Produto " + prodParaEditar.getCodProd() + " atualizado! \n");
 			}
 		} else
 			System.out.println("Produto não encontrado no carrinho! \n");

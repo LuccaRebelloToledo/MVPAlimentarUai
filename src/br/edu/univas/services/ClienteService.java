@@ -107,7 +107,7 @@ public class ClienteService {
 				System.out.println("Formato CPF: 00000000000");
 				System.out.print("Por favor digite seu CPF: ");
 				String clienteCPF = scanner.nextLine();
-				if(clienteCPF.length() != 11) {
+				if(clienteCPF.length() == 11) {
 					System.out.print("Por favor digite a forma de pagamento: ");
 					String formaDePagamento = scanner.nextLine();
 					this.extratoService = new ExtratoService();

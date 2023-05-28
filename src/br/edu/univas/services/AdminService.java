@@ -65,7 +65,7 @@ public class AdminService {
 	public void editarProduto(Scanner scanner){
 		this.produtoService = new ProdutoService();
 		if(produtoService.possuiProduto()) {
-			System.out.print("Digite o ID do produto que deseje editar: ");
+			System.out.print("Digite o ID do produto que deseja editar: ");
 			int codProdInformado = scanner.nextInt();
 			scanner.nextLine();
 			ProdutoService produto = new ProdutoService();
@@ -122,7 +122,7 @@ public class AdminService {
 	public void excluirProduto(Scanner scanner) {
 		this.produtoService = new ProdutoService();
 		if(produtoService.possuiProduto()) {
-			System.out.print("Digite o ID do produto que deseje editar: ");
+			System.out.print("Digite o ID do produto que deseja excluir: ");
 			int codProdInformado = scanner.nextInt();
 			scanner.nextLine();
 			ProdutoService produto = new ProdutoService();
