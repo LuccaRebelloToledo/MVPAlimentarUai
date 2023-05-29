@@ -33,25 +33,24 @@ public class AdminView {
 			switch(opcao) {
 			case "1":
 				adminService.criarNovoProduto(scanner);
-				break;
-			
+				break;				
 			case "2": 
 				adminService.editarProduto(scanner);
-				break;
-				
+				break;			
 			case "3":
 				adminService.excluirProduto(scanner);
-				break;
-				
+				break;			
 			case "4":
 				adminService.consultarProduto(scanner);
 				break;
 			case "5":
 				adminService.consultarExtrato();
 				break;
-				
 			case "0":
 				continua = false;
+				break;
+			default:
+				System.out.println("Opção Inválida! \n");
 				break;
 			}
 			

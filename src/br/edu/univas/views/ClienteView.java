@@ -42,7 +42,10 @@ public class ClienteView {
 				break;
 			case "0":
 				continua = false;
-				break;	
+				break;
+			default:
+				System.out.println("Opção Inválida! \n");
+				break;
 			}
 		} while (continua);
 	}
@@ -74,7 +77,7 @@ public class ClienteView {
 				break;
 			default:
 				System.out.println("Opção Inválida! \n");
-				
+				break;
 			}
 			
 		} while(continua);

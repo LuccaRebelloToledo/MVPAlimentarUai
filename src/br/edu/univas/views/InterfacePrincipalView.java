@@ -31,25 +31,21 @@ public class InterfacePrincipalView {
 			menuDeOpcoes();
 			opcao = this.scanner.nextLine();
 			
-			switch(opcao) {
-			
-			default:
-				System.out.println("Opção Inválida! \n");
-				break;
-			
+			switch(opcao) {		
 			case "1":
 				this.adminService = new AdminService();
 				adminService.validacaoAdm(scanner);
-				break;
-				
+				break;	
 			case "2":
 				this.clienteView = new ClienteView();
 				clienteView.painelCliente(scanner);
-				break;
-				
+				break;			
 			case "0": 
 				continua = false;
-				break;			
+				break;		
+			default:
+				System.out.println("Opção Inválida! \n");
+				break;
 			}
 			
 		} while(continua);
