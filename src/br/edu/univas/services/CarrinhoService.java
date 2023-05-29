@@ -20,22 +20,14 @@ public class CarrinhoService {
 	}
 	
 	public void adicionarAoCarrinho(int codProd, Produto produto, int qtdeAComprarProd) {
-			if(temNoCarrinho(codProd))
+		Carrinho prodCarrinho = prodCarrinho(codProd);
+			if(prodCarrinho != null)
 				System.out.println("O produto já existe no carrinho! \n");
 			else {
 				Carrinho carrinho = new Carrinho(produto, qtdeAComprarProd);
 				dadosCarrinho.add(carrinho);
 				System.out.println("Produto " + carrinho.getCodProd() + " adicionado com sucesso! \n");
 				}
-	}
-	
-	public boolean temNoCarrinho(int prodInformado) {
-		for(Carrinho prodCarrinho : dadosCarrinho) {
-			if(prodCarrinho.getCodProd() == prodInformado) {
-				return true;
-			}
-		}
-		return false;
 	}
 	
 	public List<Object> consultarCarrinho(){
